@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+    xmlns:fx="http://javafx.com/fxml"
+    fx:controller="com.kampala.Controllers.MarketController">
+
+    <top>
+        <HBox style="-fx-background-color: #2c3e50; -fx-padding: 15;" spacing="10">
+            <Label text="Markets"
+                style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;" />
+            <HBox HBox.hgrow="ALWAYS" />
+            
+            <Button text="Refresh"
+                onAction="#loadMarkets"
+                style="-fx-background-color: #3498db; -fx-text-fill: white;" />
+
+            <Button text="+ Add Market"
+                onAction="#goToAddMarket"
+                style="-fx-background-color: #2ecc71; -fx-text-fill: white;" />
+
+            <Button text="&#8592; Vendors"
+                onAction="#goToVendors"
+                style="-fx-background-color: #7f8c8d; -fx-text-fill: white;" />
+
+            <Button text="&#8592; Dashboard"
+                onAction="#goToDashboard"
+                style="-fx-background-color: #7f8c8d; -fx-text-fill: white;" />
+
+        </HBox>
+    </top>
+
+    <center>
+        <VBox spacing="10" style="-fx-padding: 20;">
+            <HBox spacing="10">
+                <TextField fx:id="searchField"
+                    promptText="Search by market, location or zone..."
+                    prefWidth="320"
+                    onKeyReleased="#handleSearch" />
+                <ComboBox fx:id="occupancyFilter"
+                    promptText="Occupancy filter"
+                    onAction="#handleFilter" />
+            </HBox>
+
+            <TableView fx:id="marketsTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colId" text="ID" prefWidth="50" />
+                    <TableColumn fx:id="colName" text="Market Name" prefWidth="180" />
+                    <TableColumn fx:id="colLocation" text="Location" prefWidth="150" />
+                    <TableColumn fx:id="colZone" text="Zone" prefWidth="120" />
+                    <TableColumn fx:id="colRent" text="Rent" prefWidth="100" />
+                    <TableColumn fx:id="colOccupancy" text="Occupancy" prefWidth="110" />
+                    <TableColumn fx:id="colAssignedVendor" text="Assigned Vendor ID" prefWidth="140" />
+                </columns>
+            </TableView>
+
+            <Label fx:id="statusLabel" style="-fx-text-fill: #7f8c8d;" />
+        </VBox>
+    </center>
+
+</BorderPane>

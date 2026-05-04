@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.kampala.Controllers.AddMarketController">
+
+    <top>
+        <HBox style="-fx-background-color: #2c3e50; -fx-padding: 15;" spacing="10">
+            <Label text="Add New Market"
+                   style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;"/>
+            <HBox HBox.hgrow="ALWAYS"/>
+            <Button text="&#8592; Back to Markets"
+                    onAction="#goToMarkets"
+                    style="-fx-background-color: #7f8c8d; -fx-text-fill: white;"/>
+            <Button text="&#8962; Dashboard"
+                    onAction="#goToDashboard"
+                    style="-fx-background-color: #34495e; -fx-text-fill: white;"/>
+        </HBox>
+    </top>
+
+    <center>
+        <ScrollPane fitToWidth="true">
+            <VBox spacing="15" style="-fx-padding: 30;" maxWidth="600">
+
+                <Label text="Market Information"
+                       style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+
+                <!-- Market Name -->
+                <VBox spacing="5">
+                    <Label text="Market Name"/>
+                    <TextField fx:id="marketNameField"
+                               promptText="e.g. Nakasero Market"
+                               maxWidth="500"/>
+                </VBox>
+
+                <!-- Location -->
+                <VBox spacing="5">
+                    <Label text="Location"/>
+                    <TextField fx:id="locationField"
+                               promptText="e.g. Kampala Central"
+                               maxWidth="500"/>
+                </VBox>
+
+                <!-- Zone -->
+                <VBox spacing="5">
+                    <Label text="Zone"/>
+                    <TextField fx:id="zoneField"
+                               promptText="e.g. Zone A"
+                               maxWidth="500"/>
+                </VBox>
+
+                <!-- Rent -->
+                <VBox spacing="5">
+                    <Label text="Rent (UGX)"/>
+                    <TextField fx:id="rentField"
+                               promptText="e.g. 150000.00"
+                               maxWidth="500"/>
+                </VBox>
+
+                <!-- Note: is_occupied defaults to FALSE; assigned_vendor_id set via assignment flow -->
+                <Label text="Note: Market will be created as unoccupied. Assign a vendor later."
+                       style="-fx-text-fill: #95a5a6; -fx-font-size: 11px; -fx-font-style: italic;"/>
+
+                <Button text="Add Market"
+                        onAction="#handleAddMarket"
+                        style="-fx-background-color: #2ecc71; -fx-text-fill: white;
+                               -fx-font-size: 14px; -fx-font-weight: bold;
+                               -fx-padding: 10 25; -fx-cursor: hand;"/>
+
+                <Label fx:id="statusLabel"/>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

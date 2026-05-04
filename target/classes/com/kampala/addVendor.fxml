@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.kampala.Controllers.AddVendorController">
+
+    <top>
+        <HBox style="-fx-background-color: #2c3e50; -fx-padding: 15;">
+            <Label text="Add New Vendor" style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;"/>
+            <HBox HBox.hgrow="ALWAYS"/>
+            <Button text="← Back to Vendors" onAction="#goToVendors"
+                    style="-fx-background-color: #7f8c8d; -fx-text-fill: white;"/>
+        </HBox>
+    </top>
+
+    <center>
+        <ScrollPane fitToWidth="true">
+            <VBox spacing="15" style="-fx-padding: 30;" maxWidth="600">
+
+                <Label text="Personal Information" style="-fx-font-size: 15px; -fx-font-weight: bold;"/>
+
+                <HBox spacing="10">
+                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                        <Label text="First Name"/>
+                        <TextField fx:id="firstNameField" promptText="First name"/>
+                    </VBox>
+                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                        <Label text="Last Name"/>
+                        <TextField fx:id="lastNameField" promptText="Last name"/>
+                    </VBox>
+                </HBox>
+
+                <VBox spacing="5">
+                    <Label text="Email"/>
+                    <TextField fx:id="emailField" promptText="email@example.com"/>
+                </VBox>
+
+                <HBox spacing="10">
+                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                        <Label text="Gender"/>
+                        <ComboBox fx:id="genderBox" maxWidth="Infinity">
+                            <items><javafx.collections.FXCollections fx:factory="observableArrayList">
+                                <java.lang.String fx:value="Male"/>
+                                <java.lang.String fx:value="Female"/>
+                            </javafx.collections.FXCollections></items>
+                        </ComboBox>
+                    </VBox>
+                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                        <Label text="Has Dependants"/>
+                        <ComboBox fx:id="dependantsBox" maxWidth="Infinity">
+                            <items><javafx.collections.FXCollections fx:factory="observableArrayList">
+                                <java.lang.String fx:value="Yes"/>
+                                <java.lang.String fx:value="No"/>
+                            </javafx.collections.FXCollections></items>
+                        </ComboBox>
+                    </VBox>
+                </HBox>
+
+                <VBox spacing="5">
+                    <Label text="Place of Residence"/>
+                    <TextField fx:id="residenceField" promptText="e.g. Kampala, Nakawa"/>
+                </VBox>
+
+                <Label text="Vendor Details" style="-fx-font-size: 15px; -fx-font-weight: bold;"/>
+
+                <VBox spacing="5">
+                    <Label text="Vendor Type"/>
+                    <ComboBox fx:id="vendorTypeBox" maxWidth="Infinity">
+                        <items><javafx.collections.FXCollections fx:factory="observableArrayList">
+                            <java.lang.String fx:value="Food"/>
+                            <java.lang.String fx:value="Clothing"/>
+                            <java.lang.String fx:value="Electronics"/>
+                            <java.lang.String fx:value="Crafts"/>
+                            <java.lang.String fx:value="Produce"/>
+                            <java.lang.String fx:value="Other"/>
+                        </javafx.collections.FXCollections></items>
+                    </ComboBox>
+                </VBox>
+
+                <VBox spacing="5">
+                    <Label text="Assigned Market"/>
+                    <ComboBox fx:id="marketBox" maxWidth="Infinity" promptText="Select market"/>
+                </VBox>
+
+                <Label fx:id="messageLabel" style="-fx-font-size: 13px;"/>
+
+                <Button text="Register Vendor" onAction="#handleAddVendor"
+                        maxWidth="Infinity"
+                        style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10;"/>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+
+</BorderPane>
