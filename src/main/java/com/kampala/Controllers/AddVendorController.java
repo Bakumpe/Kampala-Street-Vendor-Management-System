@@ -11,15 +11,24 @@ import java.time.LocalDate;
 
 public class AddVendorController {
 
-    @FXML private TextField firstNameField;
-    @FXML private TextField lastNameField;
-    @FXML private TextField emailField;
-    @FXML private ComboBox<String> genderBox;
-    @FXML private ComboBox<String> dependantsBox;
-    @FXML private TextField residenceField;
-    @FXML private ComboBox<String> vendorTypeBox;
-    @FXML private ComboBox<String> marketBox;
-    @FXML private Label messageLabel;
+    @FXML
+    private TextField firstNameField;
+    @FXML
+    private TextField lastNameField;
+    @FXML
+    private TextField emailField;
+    @FXML
+    private ComboBox<String> genderBox;
+    @FXML
+    private ComboBox<String> dependantsBox;
+    @FXML
+    private TextField residenceField;
+    @FXML
+    private ComboBox<String> vendorTypeBox;
+    @FXML
+    private ComboBox<String> marketBox;
+    @FXML
+    private Label messageLabel;
 
     @FXML
     public void initialize() {
@@ -28,12 +37,13 @@ public class AddVendorController {
 
     private void loadMarkets() {
         try (Connection conn = DatabaseConnection.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT market_name FROM markets")) {
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery("SELECT market_name FROM markets")) {
 
             java.util.List<String> markets = new java.util.ArrayList<>();
             markets.add("Unassigned");
-            while (rs.next()) markets.add(rs.getString(1));
+            while (rs.next())
+                markets.add(rs.getString(1));
             marketBox.setItems(FXCollections.observableArrayList(markets));
 
         } catch (SQLException e) {
@@ -65,11 +75,11 @@ public class AddVendorController {
         boolean hasDependants = "Yes".equals(dependants);
 
         String sql = "INSERT INTO vendors (first_name, last_name, email, gender, has_dependants, " +
-                     "place_of_residence, vendor_type, assigned_market, licence_number, status) " +
-                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'ACTIVE')";
+                "place_of_residence, vendor_type, assigned_market, licence_number, status) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'ACTIVE')";
 
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, firstName);
             stmt.setString(2, lastName);
@@ -93,11 +103,43 @@ public class AddVendorController {
     }
 
     private void clearFields() {
-        firstNameField.clear(); lastNameField.clear();
-        emailField.clear(); residenceField.clear();
-        genderBox.setValue(null); dependantsBox.setValue(null);
-        vendorTypeBox.setValue(null); marketBox.setValue(null);
+        firstNameField.clear();
+        lastNameField.clear();
+        emailField.clear();
+        residenceField.clear();
+        genderBox.setValue(null);
+        dependantsBox.setValue(null);
+        vendorTypeBox.setValue(null);
+        marketBox.setValue(null);
     }
 
-    @FXML private void goToVendors() throws IOException { App.setRoot("vendors"); }
+    @FXML
+    private void goToVendors() throws IOException {
+        App.setRoot("vendors");
+    }
+
+    @FXML
+    private void showDashboard() throws IOException {
+        App.setRoot("dashboard");
+    }
+
+    @FXML
+    private void showVendors() throws IOException {
+        App.setRoot("vendors");
+    }
+
+    @FXML
+    private void showMarkets() throws IOException {
+        App.setRoot("markets");
+    }
+
+    @FXML
+    private void showAdmins() throws IOException {
+        App.setRoot("admins");
+    }
+
+    @FXML
+    private void showUnassigned() throws IOException {
+        App.setRoot("unassigned");
+    }
 }

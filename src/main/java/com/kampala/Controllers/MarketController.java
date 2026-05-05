@@ -143,4 +143,30 @@ public class MarketController {
     private void goToVendors() throws IOException {
         App.setRoot("vendors");
     }
+
+    @FXML
+    private void showMarkets() throws IOException {
+        App.setRoot("markets");
+    }
+
+    @FXML
+    private void showAdmins() throws IOException {
+        App.setRoot("admins");
+    }
+
+    @FXML
+    private void showUnassigned() throws IOException {
+        App.setRoot("unassigned");
+    }
+
+    @FXML
+    private void showDashboard() throws IOException {
+        App.setRoot("dashboard");
+    }
+
+    @FXML
+    private void showVendors() throws IOException {
+        App.setRoot("vendors");
+    }
+
 }

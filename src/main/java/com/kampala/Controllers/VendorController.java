@@ -13,16 +13,26 @@ import java.sql.*;
 
 public class VendorController {
 
-    @FXML private TableView<ObservableList<String>> vendorsTable;
-    @FXML private TableColumn<ObservableList<String>, String> colId;
-    @FXML private TableColumn<ObservableList<String>, String> colName;
-    @FXML private TableColumn<ObservableList<String>, String> colType;
-    @FXML private TableColumn<ObservableList<String>, String> colMarket;
-    @FXML private TableColumn<ObservableList<String>, String> colLicence;
-    @FXML private TableColumn<ObservableList<String>, String> colStatus;
-    @FXML private TextField searchField;
-    @FXML private ComboBox<String> statusFilter;
-    @FXML private Label statusLabel;
+    @FXML
+    private TableView<ObservableList<String>> vendorsTable;
+    @FXML
+    private TableColumn<ObservableList<String>, String> colId;
+    @FXML
+    private TableColumn<ObservableList<String>, String> colName;
+    @FXML
+    private TableColumn<ObservableList<String>, String> colType;
+    @FXML
+    private TableColumn<ObservableList<String>, String> colMarket;
+    @FXML
+    private TableColumn<ObservableList<String>, String> colLicence;
+    @FXML
+    private TableColumn<ObservableList<String>, String> colStatus;
+    @FXML
+    private TextField searchField;
+    @FXML
+    private ComboBox<String> statusFilter;
+    @FXML
+    private Label statusLabel;
 
     @FXML
     public void initialize() {
@@ -47,8 +57,8 @@ public class VendorController {
         String status = statusFilter.getValue();
 
         String sql = "SELECT id, first_name || ' ' || last_name, vendor_type, " +
-                     "COALESCE(assigned_market, 'Unassigned'), " +
-                     "COALESCE(licence_number, 'N/A'), status FROM vendors WHERE 1=1";
+                "COALESCE(assigned_market, 'Unassigned'), " +
+                "COALESCE(licence_number, 'N/A'), status FROM vendors WHERE 1=1";
 
         if (!search.isEmpty())
             sql += " AND (first_name ILIKE '%" + search + "%' OR last_name ILIKE '%" + search + "%')";
@@ -56,8 +66,8 @@ public class VendorController {
             sql += " AND status = '" + status + "'";
 
         try (Connection conn = DatabaseConnection.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
                 ObservableList<String> row = FXCollections.observableArrayList();
@@ -76,7 +86,9 @@ public class VendorController {
     }
 
     @FXML
-    private void handleSearch() { loadVendors(); }
+    private void handleSearch() {
+        loadVendors();
+    }
 
     @FXML
     private void handleVendorClick(MouseEvent event) {
@@ -93,6 +105,38 @@ public class VendorController {
         }
     }
 
-    @FXML private void goToAddVendor() throws IOException { App.setRoot("addVendor"); }
-    @FXML private void goToDashboard() throws IOException { App.setRoot("dashboard"); }
+    @FXML
+    private void goToAddVendor() throws IOException {
+        App.setRoot("addVendor");
+    }
+
+    @FXML
+    private void goToDashboard() throws IOException {
+        App.setRoot("dashboard");
+    }
+
+    @FXML
+    private void showDashboard() throws IOException {
+        App.setRoot("dashboard");
+    }
+
+    @FXML
+    private void showVendors() throws IOException {
+        App.setRoot("vendors");
+    }
+
+    @FXML
+    private void showMarkets() throws IOException {
+        App.setRoot("markets");
+    }
+
+    @FXML
+    private void showAdmins() throws IOException {
+        App.setRoot("admins");
+    }
+
+    @FXML
+    private void showUnassigned() throws IOException {
+        App.setRoot("unassigned");
+    }
 }

@@ -14,17 +14,28 @@ public class VendorProfileController {
 
     public static String selectedVendorId;
 
-    @FXML private Label fullNameLabel;
-    @FXML private Label licenceLabel;
-    @FXML private Label statusBadge;
-    @FXML private Label emailLabel;
-    @FXML private Label genderLabel;
-    @FXML private Label dependantsLabel;
-    @FXML private Label residenceLabel;
-    @FXML private Label vendorTypeLabel;
-    @FXML private Label marketLabel;
-    @FXML private Label messageLabel;
-    @FXML private ComboBox<String> marketComboBox; // new
+    @FXML
+    private Label fullNameLabel;
+    @FXML
+    private Label licenceLabel;
+    @FXML
+    private Label statusBadge;
+    @FXML
+    private Label emailLabel;
+    @FXML
+    private Label genderLabel;
+    @FXML
+    private Label dependantsLabel;
+    @FXML
+    private Label residenceLabel;
+    @FXML
+    private Label vendorTypeLabel;
+    @FXML
+    private Label marketLabel;
+    @FXML
+    private Label messageLabel;
+    @FXML
+    private ComboBox<String> marketComboBox; // new
 
     @FXML
     public void initialize() {
@@ -34,12 +45,13 @@ public class VendorProfileController {
 
     private void loadMarkets() {
         try (Connection conn = DatabaseConnection.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT market_name FROM markets ORDER BY market_name")) {
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery("SELECT market_name FROM markets ORDER BY market_name")) {
 
             List<String> markets = new ArrayList<>();
             markets.add("Unassigned");
-            while (rs.next()) markets.add(rs.getString(1));
+            while (rs.next())
+                markets.add(rs.getString(1));
             marketComboBox.setItems(FXCollections.observableArrayList(markets));
 
         } catch (SQLException e) {
@@ -49,11 +61,11 @@ public class VendorProfileController {
 
     private void loadVendorProfile() {
         String sql = "SELECT first_name, last_name, email, gender, has_dependants, " +
-                     "place_of_residence, vendor_type, assigned_market, licence_number, status " +
-                     "FROM vendors WHERE id = ?";
+                "place_of_residence, vendor_type, assigned_market, licence_number, status " +
+                "FROM vendors WHERE id = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, Integer.parseInt(selectedVendorId));
             ResultSet rs = stmt.executeQuery();
@@ -76,10 +88,9 @@ public class VendorProfileController {
                 String status = rs.getString("status");
                 statusBadge.setText(status);
                 statusBadge.setStyle(
-                    "ACTIVE".equals(status)
-                    ? "-fx-text-fill: #2ecc71; -fx-font-weight: bold;"
-                    : "-fx-text-fill: #e74c3c; -fx-font-weight: bold;"
-                );
+                        "ACTIVE".equals(status)
+                                ? "-fx-text-fill: #2ecc71; -fx-font-weight: bold;"
+                                : "-fx-text-fill: #e74c3c; -fx-font-weight: bold;");
             }
 
         } catch (SQLException e) {
@@ -100,10 +111,12 @@ public class VendorProfileController {
 
         String sql = "UPDATE vendors SET assigned_market = ? WHERE id = ?";
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            if (assignedMarket != null) stmt.setString(1, assignedMarket);
-            else stmt.setNull(1, Types.VARCHAR);
+            if (assignedMarket != null)
+                stmt.setString(1, assignedMarket);
+            else
+                stmt.setNull(1, Types.VARCHAR);
 
             stmt.setInt(2, Integer.parseInt(selectedVendorId));
             stmt.executeUpdate();
@@ -119,15 +132,19 @@ public class VendorProfileController {
     }
 
     @FXML
-    private void handleDeactivate() { updateStatus("INACTIVE"); }
+    private void handleDeactivate() {
+        updateStatus("INACTIVE");
+    }
 
     @FXML
-    private void handleActivate() { updateStatus("ACTIVE"); }
+    private void handleActivate() {
+        updateStatus("ACTIVE");
+    }
 
     private void updateStatus(String status) {
         String sql = "UPDATE vendors SET status = ? WHERE id = ?";
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, status);
             stmt.setInt(2, Integer.parseInt(selectedVendorId));
@@ -142,5 +159,33 @@ public class VendorProfileController {
         }
     }
 
-    @FXML private void goToVendors() throws IOException { App.setRoot("vendors"); }
+    @FXML
+    private void goToVendors() throws IOException {
+        App.setRoot("vendors");
+    }
+
+    @FXML
+    private void showDashboard() throws IOException {
+        App.setRoot("dashboard");
+    }
+
+    @FXML
+    private void showVendors() throws IOException {
+        App.setRoot("vendors");
+    }
+
+    @FXML
+    private void showMarkets() throws IOException {
+        App.setRoot("markets");
+    }
+
+    @FXML
+    private void showAdmins() throws IOException {
+        App.setRoot("admins");
+    }
+
+    @FXML
+    private void showUnassigned() throws IOException {
+        App.setRoot("unassigned");
+    }
 }

@@ -15,18 +15,29 @@ import java.sql.Statement;
 
 public class DashboardController {
 
-    @FXML private Label totalVendorsLabel;
-    @FXML private Label activeVendorsLabel;
-    @FXML private Label totalMarketsLabel;
-    @FXML private Label unassignedLabel;
-    @FXML private Label statusLabel;
+    @FXML
+    private Label totalVendorsLabel;
+    @FXML
+    private Label activeVendorsLabel;
+    @FXML
+    private Label totalMarketsLabel;
+    @FXML
+    private Label unassignedLabel;
+    @FXML
+    private Label statusLabel;
 
-    @FXML private TableView<ObservableList<String>> vendorsTable;
-    @FXML private TableColumn<ObservableList<String>, String> colName;
-    @FXML private TableColumn<ObservableList<String>, String> colVendorType;
-    @FXML private TableColumn<ObservableList<String>, String> colMarket;
-    @FXML private TableColumn<ObservableList<String>, String> colLicence;
-    @FXML private TableColumn<ObservableList<String>, String> colStatus;
+    @FXML
+    private TableView<ObservableList<String>> vendorsTable;
+    @FXML
+    private TableColumn<ObservableList<String>, String> colName;
+    @FXML
+    private TableColumn<ObservableList<String>, String> colVendorType;
+    @FXML
+    private TableColumn<ObservableList<String>, String> colMarket;
+    @FXML
+    private TableColumn<ObservableList<String>, String> colLicence;
+    @FXML
+    private TableColumn<ObservableList<String>, String> colStatus;
 
     @FXML
     public void initialize() {
@@ -45,23 +56,27 @@ public class DashboardController {
 
     private void loadStats() {
         try (Connection conn = DatabaseConnection.getConnection();
-             Statement stmt = conn.createStatement()) {
+                Statement stmt = conn.createStatement()) {
 
             // Total vendors
             ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM vendors");
-            if (rs.next()) totalVendorsLabel.setText(String.valueOf(rs.getInt(1)));
+            if (rs.next())
+                totalVendorsLabel.setText(String.valueOf(rs.getInt(1)));
 
             // Active vendors
             rs = stmt.executeQuery("SELECT COUNT(*) FROM vendors WHERE status = 'ACTIVE'");
-            if (rs.next()) activeVendorsLabel.setText(String.valueOf(rs.getInt(1)));
+            if (rs.next())
+                activeVendorsLabel.setText(String.valueOf(rs.getInt(1)));
 
             // Total markets
             rs = stmt.executeQuery("SELECT COUNT(*) FROM markets");
-            if (rs.next()) totalMarketsLabel.setText(String.valueOf(rs.getInt(1)));
+            if (rs.next())
+                totalMarketsLabel.setText(String.valueOf(rs.getInt(1)));
 
             // Unassigned vendors
             rs = stmt.executeQuery("SELECT COUNT(*) FROM vendors WHERE assigned_market IS NULL");
-            if (rs.next()) unassignedLabel.setText(String.valueOf(rs.getInt(1)));
+            if (rs.next())
+                unassignedLabel.setText(String.valueOf(rs.getInt(1)));
 
         } catch (SQLException e) {
             statusLabel.setText("Error loading stats: " + e.getMessage());
@@ -72,12 +87,11 @@ public class DashboardController {
         ObservableList<ObservableList<String>> data = FXCollections.observableArrayList();
 
         try (Connection conn = DatabaseConnection.getConnection();
-             Statement stmt = conn.createStatement()) {
+                Statement stmt = conn.createStatement()) {
 
             ResultSet rs = stmt.executeQuery(
-                "SELECT first_name || ' ' || last_name, vendor_type, assigned_market, licence_number, status " +
-                "FROM vendors ORDER BY id DESC LIMIT 10"
-            );
+                    "SELECT first_name || ' ' || last_name, vendor_type, assigned_market, licence_number, status " +
+                            "FROM vendors ORDER BY id DESC LIMIT 10");
 
             while (rs.next()) {
                 ObservableList<String> row = FXCollections.observableArrayList();
@@ -95,11 +109,30 @@ public class DashboardController {
         }
     }
 
-    @FXML private void showDashboard() { statusLabel.setText("Dashboard"); }
-    @FXML private void showVendors() throws IOException { App.setRoot("vendors"); }
-    @FXML private void showMarkets() throws IOException { App.setRoot("markets"); }
-    @FXML private void showAdmins() throws IOException{ App.setRoot("admins"); }
-    @FXML private void showUnassigned() { statusLabel.setText("Unassigned Vendors — coming soon"); }
+    @FXML
+    private void showDashboard() {
+        statusLabel.setText("Dashboard");
+    }
+
+    @FXML
+    private void showVendors() throws IOException {
+        App.setRoot("vendors");
+    }
+
+    @FXML
+    private void showMarkets() throws IOException {
+        App.setRoot("markets");
+    }
+
+    @FXML
+    private void showAdmins() throws IOException {
+        App.setRoot("admins");
+    }
+
+    @FXML
+    private void showUnassigned() {
+        statusLabel.setText("Unassigned Vendors — coming soon");
+    }
 
     @FXML
     private void handleLogout() {

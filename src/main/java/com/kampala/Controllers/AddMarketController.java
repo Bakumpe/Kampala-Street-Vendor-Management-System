@@ -10,18 +10,23 @@ import java.sql.*;
 
 public class AddMarketController {
 
-    @FXML private TextField marketNameField;
-    @FXML private TextField locationField;
-    @FXML private TextField zoneField;
-    @FXML private TextField rentField;
-    @FXML private Label statusLabel;
+    @FXML
+    private TextField marketNameField;
+    @FXML
+    private TextField locationField;
+    @FXML
+    private TextField zoneField;
+    @FXML
+    private TextField rentField;
+    @FXML
+    private Label statusLabel;
 
     @FXML
     private void handleAddMarket() {
         String marketName = marketNameField.getText().trim();
-        String location   = locationField.getText().trim();
-        String zone       = zoneField.getText().trim();
-        String rentText   = rentField.getText().trim();
+        String location = locationField.getText().trim();
+        String zone = zoneField.getText().trim();
+        String rentText = rentField.getText().trim();
 
         // Validation
         if (marketName.isEmpty() || location.isEmpty() || zone.isEmpty() || rentText.isEmpty()) {
@@ -44,7 +49,7 @@ public class AddMarketController {
         String sql = "INSERT INTO markets (market_name, location, zone, rent, is_occupied) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, marketName);
             pstmt.setString(2, location);
@@ -64,8 +69,8 @@ public class AddMarketController {
 
     private void setStatus(String message, boolean success) {
         statusLabel.setStyle(success
-            ? "-fx-text-fill: #27ae60; -fx-font-weight: bold;"
-            : "-fx-text-fill: #e74c3c; -fx-font-weight: bold;");
+                ? "-fx-text-fill: #27ae60; -fx-font-weight: bold;"
+                : "-fx-text-fill: #e74c3c; -fx-font-weight: bold;");
         statusLabel.setText(message);
     }
 
@@ -76,6 +81,38 @@ public class AddMarketController {
         rentField.clear();
     }
 
-    @FXML private void goToMarkets()   throws IOException { App.setRoot("markets");   }
-    @FXML private void goToDashboard() throws IOException { App.setRoot("dashboard"); }
+    @FXML
+    private void goToMarkets() throws IOException {
+        App.setRoot("markets");
+    }
+
+    @FXML
+    private void goToDashboard() throws IOException {
+        App.setRoot("dashboard");
+    }
+
+    @FXML
+    private void showDashboard() throws IOException {
+        App.setRoot("dashboard");
+    }
+
+    @FXML
+    private void showVendors() throws IOException {
+        App.setRoot("vendors");
+    }
+
+    @FXML
+    private void showMarkets() throws IOException {
+        App.setRoot("markets");
+    }
+
+    @FXML
+    private void showAdmins() throws IOException {
+        App.setRoot("admins");
+    }
+
+    @FXML
+    private void showUnassigned() throws IOException {
+        App.setRoot("unassigned");
+    }
 }

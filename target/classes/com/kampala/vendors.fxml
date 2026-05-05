@@ -17,6 +17,22 @@
         </HBox>
     </top>
 
+    <!-- LEFT SIDEBAR -->
+    <left>
+        <VBox spacing="5" style="-fx-background-color: #34495e; -fx-padding: 10;" prefWidth="180">
+            <Button text="🏠  Dashboard" onAction="#showDashboard" maxWidth="Infinity"
+                    style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER-LEFT;"/>
+            <Button text="👤  Vendors" onAction="#showVendors" maxWidth="Infinity"
+                    style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER-LEFT;"/>
+            <Button text="🏪  Markets" onAction="#showMarkets" maxWidth="Infinity"
+                    style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER-LEFT;"/>
+            <Button text="👮  Administrators" onAction="#showAdmins" maxWidth="Infinity"
+                    style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER-LEFT;"/>
+            <Button text="📋  Unassigned Vendors" onAction="#showUnassigned" maxWidth="Infinity"
+                    style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER-LEFT;"/>
+        </VBox>
+    </left>
+
     <center>
         <VBox spacing="10" style="-fx-padding: 20;">
             <HBox spacing="10">

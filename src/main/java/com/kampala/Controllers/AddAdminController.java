@@ -10,14 +10,22 @@ import java.sql.*;
 
 public class AddAdminController {
 
-    @FXML private TextField firstNameField;
-    @FXML private TextField lastNameField;
-    @FXML private TextField emailField;
-    @FXML private TextField usernameField;
-    @FXML private PasswordField passwordField;
-    @FXML private ComboBox<String> roleBox;
-    @FXML private TextField zoneField;
-    @FXML private Label messageLabel;
+    @FXML
+    private TextField firstNameField;
+    @FXML
+    private TextField lastNameField;
+    @FXML
+    private TextField emailField;
+    @FXML
+    private TextField usernameField;
+    @FXML
+    private PasswordField passwordField;
+    @FXML
+    private ComboBox<String> roleBox;
+    @FXML
+    private TextField zoneField;
+    @FXML
+    private Label messageLabel;
 
     @FXML
     public void initialize() {
@@ -28,12 +36,12 @@ public class AddAdminController {
     @FXML
     private void handleAddAdmin() {
         String firstName = firstNameField.getText().trim();
-        String lastName  = lastNameField.getText().trim();
-        String email     = emailField.getText().trim();
-        String username  = usernameField.getText().trim();
-        String password  = passwordField.getText().trim();
-        String role      = roleBox.getValue();
-        String zone      = zoneField.getText().trim();
+        String lastName = lastNameField.getText().trim();
+        String email = emailField.getText().trim();
+        String username = usernameField.getText().trim();
+        String password = passwordField.getText().trim();
+        String role = roleBox.getValue();
+        String zone = zoneField.getText().trim();
 
         if (firstName.isEmpty() || lastName.isEmpty() || username.isEmpty() || password.isEmpty() || role == null) {
             setMessage("Please fill in all required fields.", false);
@@ -41,10 +49,10 @@ public class AddAdminController {
         }
 
         String sql = "INSERT INTO users (first_name, last_name, email, username, password, role, zone, status) " +
-                     "VALUES (?, ?, ?, ?, ?, ?, ?, 'ACTIVE')";
+                "VALUES (?, ?, ?, ?, ?, ?, ?, 'ACTIVE')";
 
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, firstName);
             stmt.setString(2, lastName);
@@ -73,10 +81,42 @@ public class AddAdminController {
     }
 
     private void clearFields() {
-        firstNameField.clear(); lastNameField.clear(); emailField.clear();
-        usernameField.clear(); passwordField.clear(); zoneField.clear();
+        firstNameField.clear();
+        lastNameField.clear();
+        emailField.clear();
+        usernameField.clear();
+        passwordField.clear();
+        zoneField.clear();
         roleBox.setValue("ADMINISTRATOR");
     }
 
-    @FXML private void goToAdmins() throws IOException { App.setRoot("admins"); }
+    @FXML
+    private void goToAdmins() throws IOException {
+        App.setRoot("admins");
+    }
+
+    @FXML
+    private void showDashboard() throws IOException {
+        App.setRoot("dashboard");
+    }
+
+    @FXML
+    private void showVendors() throws IOException {
+        App.setRoot("vendors");
+    }
+
+    @FXML
+    private void showMarkets() throws IOException {
+        App.setRoot("markets");
+    }
+
+    @FXML
+    private void showAdmins() throws IOException {
+        App.setRoot("admins");
+    }
+
+    @FXML
+    private void showUnassigned() throws IOException {
+        App.setRoot("unassigned");
+    }
 }

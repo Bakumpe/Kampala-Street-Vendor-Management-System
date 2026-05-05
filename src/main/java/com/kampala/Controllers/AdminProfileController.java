@@ -12,15 +12,24 @@ public class AdminProfileController {
 
     public static String selectedAdminId;
 
-    @FXML private Label fullNameLabel;
-    @FXML private Label usernameLabel;
-    @FXML private Label emailLabel;
-    @FXML private Label roleLabel;
-    @FXML private Label zoneLabel;
-    @FXML private Label statusBadge;
-    @FXML private ComboBox<String> roleComboBox;
-    @FXML private TextField zoneField;
-    @FXML private Label messageLabel;
+    @FXML
+    private Label fullNameLabel;
+    @FXML
+    private Label usernameLabel;
+    @FXML
+    private Label emailLabel;
+    @FXML
+    private Label roleLabel;
+    @FXML
+    private Label zoneLabel;
+    @FXML
+    private Label statusBadge;
+    @FXML
+    private ComboBox<String> roleComboBox;
+    @FXML
+    private TextField zoneField;
+    @FXML
+    private Label messageLabel;
 
     @FXML
     public void initialize() {
@@ -30,12 +39,12 @@ public class AdminProfileController {
 
     private void loadProfile() {
         String sql = "SELECT COALESCE(first_name || ' ' || last_name, username), username, " +
-                     "COALESCE(email, 'N/A'), COALESCE(role, 'ADMINISTRATOR'), " +
-                     "COALESCE(zone, 'All Zones'), COALESCE(status, 'ACTIVE') " +
-                     "FROM users WHERE id = ?";
+                "COALESCE(email, 'N/A'), COALESCE(role, 'ADMINISTRATOR'), " +
+                "COALESCE(zone, 'All Zones'), COALESCE(status, 'ACTIVE') " +
+                "FROM users WHERE id = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, Integer.parseInt(selectedAdminId));
             ResultSet rs = stmt.executeQuery();
@@ -50,8 +59,8 @@ public class AdminProfileController {
                 String status = rs.getString(6);
                 statusBadge.setText(status);
                 statusBadge.setStyle("ACTIVE".equals(status)
-                    ? "-fx-text-fill: #2ecc71; -fx-font-weight: bold;"
-                    : "-fx-text-fill: #e74c3c; -fx-font-weight: bold;");
+                        ? "-fx-text-fill: #2ecc71; -fx-font-weight: bold;"
+                        : "-fx-text-fill: #e74c3c; -fx-font-weight: bold;");
 
                 roleComboBox.setValue(rs.getString(4));
                 zoneField.setText("All Zones".equals(rs.getString(5)) ? "" : rs.getString(5));
@@ -69,7 +78,7 @@ public class AdminProfileController {
 
         String sql = "UPDATE users SET role = ?, zone = ? WHERE id = ?";
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, role);
             stmt.setString(2, zone.isEmpty() ? null : zone);
@@ -84,13 +93,20 @@ public class AdminProfileController {
         }
     }
 
-    @FXML private void handleDeactivate() { updateStatus("INACTIVE"); }
-    @FXML private void handleActivate()   { updateStatus("ACTIVE"); }
+    @FXML
+    private void handleDeactivate() {
+        updateStatus("INACTIVE");
+    }
+
+    @FXML
+    private void handleActivate() {
+        updateStatus("ACTIVE");
+    }
 
     private void updateStatus(String status) {
         String sql = "UPDATE users SET status = ? WHERE id = ?";
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, status);
             stmt.setInt(2, Integer.parseInt(selectedAdminId));
@@ -108,5 +124,33 @@ public class AdminProfileController {
         messageLabel.setText(msg);
     }
 
-    @FXML private void goToAdmins() throws IOException { App.setRoot("admins"); }
+    @FXML
+    private void goToAdmins() throws IOException {
+        App.setRoot("admins");
+    }
+
+    @FXML
+    private void showDashboard() throws IOException {
+        App.setRoot("dashboard");
+    }
+
+    @FXML
+    private void showVendors() throws IOException {
+        App.setRoot("vendors");
+    }
+
+    @FXML
+    private void showMarkets() throws IOException {
+        App.setRoot("markets");
+    }
+
+    @FXML
+    private void showAdmins() throws IOException {
+        App.setRoot("admins");
+    }
+
+    @FXML
+    private void showUnassigned() throws IOException {
+        App.setRoot("unassigned");
+    }
 }
