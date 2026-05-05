@@ -3,15 +3,16 @@
 <?import javafx.scene.layout.*?>
 
 <BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.kampala.Controllers.VendorProfileController">
+    xmlns:fx="http://javafx.com/fxml"
+    fx:controller="com.kampala.Controllers.VendorProfileController">
 
     <top>
         <HBox style="-fx-background-color: #2c3e50; -fx-padding: 15;">
-            <Label text="Vendor Profile" style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;"/>
-            <HBox HBox.hgrow="ALWAYS"/>
+            <Label text="Vendor Profile"
+                style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;" />
+            <HBox HBox.hgrow="ALWAYS" />
             <Button text="← Back to Vendors" onAction="#goToVendors"
-                    style="-fx-background-color: #7f8c8d; -fx-text-fill: white;"/>
+                style="-fx-background-color: #7f8c8d; -fx-text-fill: white;" />
         </HBox>
     </top>
 
@@ -20,45 +21,59 @@
 
             <VBox style="-fx-background-color: #2c3e50; -fx-padding: 25; -fx-background-radius: 10;">
                 <Label fx:id="fullNameLabel" text="Vendor Name"
-                       style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;"/>
+                    style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;" />
                 <Label fx:id="licenceLabel" text="Licence No."
-                       style="-fx-text-fill: #bdc3c7; -fx-font-size: 13px;"/>
+                    style="-fx-text-fill: #bdc3c7; -fx-font-size: 13px;" />
                 <Label fx:id="statusBadge" text="ACTIVE"
-                       style="-fx-text-fill: #2ecc71; -fx-font-size: 13px; -fx-font-weight: bold;"/>
+                    style="-fx-text-fill: #2ecc71; -fx-font-size: 13px; -fx-font-weight: bold;" />
             </VBox>
 
-            <Label text="Personal Details" style="-fx-font-size: 15px; -fx-font-weight: bold;"/>
+            <Label text="Personal Details" style="-fx-font-size: 15px; -fx-font-weight: bold;" />
             <GridPane hgap="15" vgap="10">
-                <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-weight: bold;"/>
-                <Label fx:id="emailLabel" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="0"
+                    style="-fx-font-weight: bold;" />
+                <Label fx:id="emailLabel" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
-                <Label text="Gender:" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-font-weight: bold;"/>
-                <Label fx:id="genderLabel" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                <Label text="Gender:" GridPane.columnIndex="0" GridPane.rowIndex="1"
+                    style="-fx-font-weight: bold;" />
+                <Label fx:id="genderLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-                <Label text="Dependants:" GridPane.columnIndex="0" GridPane.rowIndex="2" style="-fx-font-weight: bold;"/>
-                <Label fx:id="dependantsLabel" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                <Label text="Dependants:" GridPane.columnIndex="0" GridPane.rowIndex="2"
+                    style="-fx-font-weight: bold;" />
+                <Label fx:id="dependantsLabel" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-                <Label text="Residence:" GridPane.columnIndex="0" GridPane.rowIndex="3" style="-fx-font-weight: bold;"/>
-                <Label fx:id="residenceLabel" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                <Label text="Residence:" GridPane.columnIndex="0" GridPane.rowIndex="3"
+                    style="-fx-font-weight: bold;" />
+                <Label fx:id="residenceLabel" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             </GridPane>
 
-            <Label text="Vendor Details" style="-fx-font-size: 15px; -fx-font-weight: bold;"/>
+            <Label text="Vendor Details" style="-fx-font-size: 15px; -fx-font-weight: bold;" />
             <GridPane hgap="15" vgap="10">
-                <Label text="Vendor Type:" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-weight: bold;"/>
-                <Label fx:id="vendorTypeLabel" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                <Label text="Vendor Type:" GridPane.columnIndex="0" GridPane.rowIndex="0"
+                    style="-fx-font-weight: bold;" />
+                <Label fx:id="vendorTypeLabel" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
-                <Label text="Assigned Market:" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-font-weight: bold;"/>
-                <Label fx:id="marketLabel" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                <Label text="Assigned Market:" GridPane.columnIndex="0" GridPane.rowIndex="1"
+                    style="-fx-font-weight: bold;" />
+                <Label fx:id="marketLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                <Label text="Reassign Market:" GridPane.columnIndex="0" GridPane.rowIndex="2"
+                    style="-fx-font-weight: bold;" />
+                <HBox spacing="8" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <ComboBox fx:id="marketComboBox" promptText="Select a market" prefWidth="200" />
+                    <Button text="Assign" onAction="#handleAssignMarket"
+                        style="-fx-background-color: #3498db; -fx-text-fill: white;" />
+                </HBox>
             </GridPane>
 
             <HBox spacing="10">
                 <Button text="Deactivate Vendor" onAction="#handleDeactivate"
-                        style="-fx-background-color: #e74c3c; -fx-text-fill: white;"/>
+                    style="-fx-background-color: #e74c3c; -fx-text-fill: white;" />
                 <Button text="Activate Vendor" onAction="#handleActivate"
-                        style="-fx-background-color: #2ecc71; -fx-text-fill: white;"/>
+                    style="-fx-background-color: #2ecc71; -fx-text-fill: white;" />
             </HBox>
 
-            <Label fx:id="messageLabel" style="-fx-font-size: 13px;"/>
+            <Label fx:id="messageLabel" style="-fx-font-size: 13px;" />
 
         </VBox>
     </center>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.kampala.Controllers.AddAdminController">
+    <top>
+        <HBox style="-fx-background-color: #2c3e50; -fx-padding: 15;">
+            <Label text="Add Administrator" style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;"/>
+            <HBox HBox.hgrow="ALWAYS"/>
+            <Button text="← Back" onAction="#goToAdmins"
+                    style="-fx-background-color: #7f8c8d; -fx-text-fill: white;"/>
+        </HBox>
+    </top>
+    <center>
+        <ScrollPane fitToWidth="true">
+            <VBox spacing="15" style="-fx-padding: 30;" maxWidth="550">
+
+                <HBox spacing="10">
+                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                        <Label text="First Name *"/>
+                        <TextField fx:id="firstNameField" promptText="First name"/>
+                    </VBox>
+                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                        <Label text="Last Name *"/>
+                        <TextField fx:id="lastNameField" promptText="Last name"/>
+                    </VBox>
+                </HBox>
+
+                <VBox spacing="5">
+                    <Label text="Email"/>
+                    <TextField fx:id="emailField" promptText="email@kcca.go.ug"/>
+                </VBox>
+
+                <VBox spacing="5">
+                    <Label text="Username *"/>
+                    <TextField fx:id="usernameField" promptText="Unique username"/>
+                </VBox>
+
+                <VBox spacing="5">
+                    <Label text="Password *"/>
+                    <PasswordField fx:id="passwordField" promptText="Password"/>
+                </VBox>
+
+                <HBox spacing="10">
+                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                        <Label text="Role *"/>
+                        <ComboBox fx:id="roleBox" maxWidth="Infinity"/>
+                    </VBox>
+                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                        <Label text="Assigned Zone"/>
+                        <TextField fx:id="zoneField" promptText="e.g. Nakawa, Kawempe"/>
+                    </VBox>
+                </HBox>
+
+                <Label fx:id="messageLabel" style="-fx-font-size: 13px;"/>
+
+                <Button text="Create Administrator" onAction="#handleAddAdmin" maxWidth="Infinity"
+                        style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10;"/>
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>

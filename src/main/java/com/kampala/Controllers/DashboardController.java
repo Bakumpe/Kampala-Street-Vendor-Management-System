@@ -98,7 +98,7 @@ public class DashboardController {
     @FXML private void showDashboard() { statusLabel.setText("Dashboard"); }
     @FXML private void showVendors() throws IOException { App.setRoot("vendors"); }
     @FXML private void showMarkets() throws IOException { App.setRoot("markets"); }
-    @FXML private void showAdmins() { statusLabel.setText("Administrators — coming soon"); }
+    @FXML private void showAdmins() throws IOException{ App.setRoot("admins"); }
     @FXML private void showUnassigned() { statusLabel.setText("Unassigned Vendors — coming soon"); }
 
     @FXML
